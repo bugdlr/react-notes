@@ -7,8 +7,8 @@ export class EditContainer extends Component {
         super(props)
     
         this.state = {
-            id: ""
-            note: "testing testing"
+            id: "",
+            note: "testing testing",
             isEditing: false
         }
         this.create = this.create.bind(this);
@@ -16,22 +16,28 @@ export class EditContainer extends Component {
         this.update = this.update.bind(this);
     }
 
-      create(newNote) {
-          localStorage.setItem({id: uuid(), note: newNote});
+      create(notes, newNote) {
+          this.setState({ note: newNote, id: uuid() });
+          localStorage.setItem(notes, {...notes, "id": this.state.id, "content": newNote});
       }
 
       delete(id) {
           localStorage.removeItem(id);
       }
 
-      update(id, updatedNote) {
-         localStorage.id = updatedNote;
+      update(updatedNote) {
+         this.setState({note: updatedNote});
+         localStorage.setItem("notes", {
+             "id": this.state.id,
+             "content": updatedNote
+         });
       }
     
     render() {
         return (
             <div>
                 <Edit
+                    id={this.id}
                     note={this.state.note}
                     create={this.create} 
                     update={this.update}

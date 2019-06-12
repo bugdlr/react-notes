@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 
 export class Edit extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.handleChange = this.handleChange.bind(this);   
         this.handleDelete = this.handleDelete.bind(this);   
@@ -11,7 +11,8 @@ export class Edit extends Component {
     }
 
     handleChange(evt){
-        this.props.update(evt.target.id, evt.target.value);
+        this.props.update([evt.target.name], evt.target.value);
+        console.log(evt.target.value);
     }
 
     handleDelete(evt){
@@ -33,9 +34,6 @@ export class Edit extends Component {
                             type = 'text'
                             placeholder = 'Your note here...'
                             name = 'note'
-                            value = {
-                                this.props.note
-                            }
                             onChange = {
                                 this.handleChange
                             } />

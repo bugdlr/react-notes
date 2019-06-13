@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Edit from './Edit';
 import uuid from 'uuid/v4';
+
+import Edit from '../../components/Edit/Edit';
+
 
 export class EditContainer extends Component {
     constructor(props) {

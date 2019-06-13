@@ -1,13 +1,18 @@
-import React from 'react';
-import './App.css';
-import NotesList from './NotesList';
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <NotesList />
-    </div>
-  );
+import NotesList from './containers/NotesList/NotesList';
+import EditContainer from './containers/EditContainer/EditContainer';
+
+class App extends Component {
+  render () {
+    return (
+      <div className="App">
+        <Route path="/" exact component={NotesList} />
+        <Route path="/edit/:id" exact component={EditContainer} />
+      </div>
+    );
+  }
 }
 
 export default App;

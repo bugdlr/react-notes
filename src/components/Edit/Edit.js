@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./Edit.scss";
 
 export class Edit extends Component {
   constructor(props) {
@@ -10,7 +11,10 @@ export class Edit extends Component {
   }
 
   handleChange(evt) {
-    this.props.update([evt.target.name], evt.target.value);
+    this.setState({
+      [evt.target.name]: evt.target.value
+    });
+    this.props.update(evt.target.value);
     console.log(evt.target.value);
   }
 
@@ -20,23 +24,37 @@ export class Edit extends Component {
 
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.create(evt.target.value);
+    this.props.create(this.props.notes, evt.target.value);
   }
 
   render() {
     return (
       <div>
-        <form>
+        <form className="EditForm">
+          <label htmlFor="title"></label>
+          <input 
+            id="title" 
+            type="text" 
+            className="EditForm__title"
+            name="title" 
+            placeholder="title"
+            value={this.props.note.title} 
+            onChange={this.handleChange} 
+          />
           <label htmlFor="note"></label>
           <textarea
             id="note"
             type="text"
+            className="EditForm__note"
             placeholder="Your note here..."
+            value={this.props.note.content}
             name="note"
             onChange={this.handleChange}
           />
-          <button onClick={this.handleSubmit}>Save</button>
-          <button onClick={this.handleDelete}>Delete</button>
+          <div className="btn-container">
+            <button onClick={this.handleDelete} className="EditForm__delete btn">Delete</button>
+            <button onClick={this.handleSubmit} className="EditForm__save btn">Save</button>
+          </div>
         </form>
       </div>
     );

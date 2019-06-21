@@ -1,0 +1,27 @@
+.EditForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 10px auto;
+
+    &__title {
+        line-height: 1.5rem;
+        font-size: 1.4rem;
+    }
+
+    &__note {
+        margin: 10px 0;
+        min-height: 100px;
+    }
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn {
+    width: auto;
+    padding: 5px 15px;
+    text-transform: uppercase;
+}

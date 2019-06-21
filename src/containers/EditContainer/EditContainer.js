@@ -9,8 +9,12 @@ export class EditContainer extends Component {
         super(props)
     
         this.state = {
-            id: "",
-            note: "testing testing",
+            note: {
+                id: "",
+                title: "",
+                content: "",
+                time: ""
+            },
             isEditing: false
         }
         this.create = this.create.bind(this);
@@ -19,8 +23,11 @@ export class EditContainer extends Component {
     }
 
       create(notes, newNote) {
-          this.setState({ note: newNote, id: uuid() });
-          localStorage.setItem(notes, {...notes, "id": this.state.id, "content": newNote});
+        //   send new note to list of notes
+          localStorage.setItem(notes, JSON.stringify({...notes, "id": uuid(), "note": newNote}));
+            this.setState({
+                notes: [...this.state.notes, newNote]
+            })  
       }
 
       delete(id) {
@@ -28,11 +35,15 @@ export class EditContainer extends Component {
       }
 
       update(updatedNote) {
-         this.setState({note: updatedNote});
-         localStorage.setItem("notes", {
-             "id": this.state.id,
-             "content": updatedNote
+         this.setState({
+             note: updatedNote
          });
+         localStorage.setItem("notes", JSON.stringify({
+             "id": this.state.id,
+             "title": this.state.title,
+             "content": (updatedNote),
+             "time": new Date()
+         }));
       }
     
     render() {
@@ -40,6 +51,7 @@ export class EditContainer extends Component {
             <div>
                 <Edit
                     id={this.id}
+                    title={this.state.title}
                     note={this.state.note}
                     create={this.create} 
                     update={this.update}

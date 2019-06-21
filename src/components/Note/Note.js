@@ -9,6 +9,7 @@ const note = (props) => {
           {props.title}
         </Link>
       </p>
+      <p>{props.content}</p>
       <p>{props.time}</p>
     </React.Fragment>
   );
